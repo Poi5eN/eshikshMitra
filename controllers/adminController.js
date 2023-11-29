@@ -2,7 +2,7 @@ const Collection = require("../models/adminModel");
 const FeeStructure = require("../models/feeStructureModel");
 const Teacher = require("../models/teacherModel");
 const cloudinary = require("cloudinary");
-const getDataUri = require("../utils/datauri");
+const getDataUri = require("../utils/dataUri");
 const sendEmail = require("../utils/email");
 
 const {

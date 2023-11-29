@@ -1,5 +1,5 @@
 const Collection = require('../models/adminModel')
-const getDataUri = require('../utils/datauri')
+const getDataUri = require('../utils/dataUri')
 const { hashPassword } = require('./authController')
 const cloudinary = require('cloudinary')
 const { v4: uuidv4 } = require('uuid');
