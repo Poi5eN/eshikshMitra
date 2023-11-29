@@ -15,6 +15,13 @@ app.use(express.json())
 app.use(cors());
 app.use(cookieParser())
 
+app.get("/", (req, res) => {
+    res.status(201).json({
+        success: true,
+        message: "All Route work fine"
+    })
+})
+
 app.use('/api/v1',routes)
 
 module.exports = app
