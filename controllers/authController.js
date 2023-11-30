@@ -6,12 +6,14 @@ const createToken = (user) => {
   return token;
 };
 
-const setTokenCookie = (res, token) => {
+const setTokenCookie = (req, res, token) => {
   res.cookie('token', token, {
     httpOnly: true,
     expires: new Date(Date.now() + 5 * 24 * 60 * 60 * 1000),
     path: '/',
   });
+  console.log("tokenisthe-=========", token)
+  console.log("tokenis--------------------", req.cookies)
 };
 
 const fetchTokenFromCookie = (req) => {

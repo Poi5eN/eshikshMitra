@@ -50,7 +50,7 @@ exports.loginAll =async (req, res, next) => {
     
     const token = await createToken(user);
     console.log("vijay------------>", token)
-    await setTokenCookie(res, token);
+    await setTokenCookie(req, res, token);
     
     return res.status(200).json({
         success: true,
