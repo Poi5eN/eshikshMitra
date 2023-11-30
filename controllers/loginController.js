@@ -48,8 +48,9 @@ exports.loginAll =async (req, res, next) => {
         })
     }
     
-    const token = createToken(user);
-    setTokenCookie(res, token);
+    const token = await createToken(user);
+    console.log("vijay------------>", token)
+    await setTokenCookie(res, token);
     
     return res.status(200).json({
         success: true,
