@@ -9,8 +9,7 @@ const createToken = (user) => {
 const setTokenCookie = async(req, res, token) => {
  await res.cookie('token', token, {
     httpOnly: true,
-    expires: new Date(Date.now() + 5 * 24 * 60 * 60 * 1000),
-    path: '/',
+    expires: new Date(Date.now() + 5 * 24 * 60 * 60 * 1000)
   });
   console.log("tokenisthe-=========", token)
   console.log("tokenis--------------------", req.cookies)
