@@ -7,6 +7,7 @@ const createToken = (user) => {
 };
 
 const setTokenCookie = async(req, res, token) => {
+  console.log("SAjay Vijay")
  await res.cookie('token', token, {
     httpOnly: true,
     expires: new Date(Date.now() + 5 * 24 * 60 * 60 * 1000)
