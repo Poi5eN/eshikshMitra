@@ -9,7 +9,8 @@ const createToken = (user) => {
 const setTokenCookie = (res, token) => {
   res.cookie('token', token, {
     httpOnly: true,
-    expires: new Date(Date.now() + 5 * 24 * 60 * 60 * 1000)
+    expires: new Date(Date.now() + 5 * 24 * 60 * 60 * 1000),
+    path: '/',
   });
 };
 
