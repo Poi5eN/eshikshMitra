@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken')
 const verifyToken = async (req, res, next) => {
   const token = req.cookies.token;
   // console.log("Cookies",cookie)
-  // console.log("Token",token)
+  console.log("Token",token)
   if (!token) {
     return res.status(401).json({ message: 'Please Login First' });
   }
