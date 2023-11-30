@@ -6,7 +6,7 @@ const app = express()
 
 app.use(express.json())
 const corsOptions = {
-    origin: ['https://eshikshamitra.in','http://localhost:3000', 'https://tiny-tan-wombat-shoe.cyclic.app'],
+    origin: ['https://eshikshamitra.in','http://localhost:3000'],
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true, // Include cookies and authentication headers
   };
