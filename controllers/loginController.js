@@ -49,9 +49,10 @@ exports.loginAll =async (req, res, next) => {
     }
     
     const token = await createToken(user);
-    // console.log("vijay------------>", token)
+    console.log("vijay------------>", token)
     // await setTokenCookie(req, res, token);
-    res.cookie('token', token);
+    res.cookie('token', token, { httpOnly: true, secure: true, sameSite: 'None' });
+
   console.log("tokenisthe-=========", token);
   console.log("AJAYVIJAY", req.cookies);
   console.log("tokenis--------------------", req.cookies.token);
