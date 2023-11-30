@@ -6,11 +6,17 @@ const createToken = (user) => {
   return token;
 };
 
-const setTokenCookie = async(req, res, token) => {
- await res.cookie('token', token);
-  console.log("tokenisthe-=========", token)
-  console.log("AJAYVIJAY", req.cookie)
-  console.log("tokenis--------------------", req.cookies.token)
+// const setTokenCookie = async(req, res, token) => {
+//  await res.cookie('Token', token, {
+//     httpOnly: true,
+//     expires: new Date(Date.now() + 5 * 24 * 60 * 60 * 1000)
+//   });
+//   console.log("tokenisthe-=========", token)
+//   console.log("tokenis--------------------", req.cookies)
+// };
+const setTokenCookie = (req, res, token) => {
+  res.cookie('token', token, { httpOnly: true, expires: new Date(Date.now() + 1 * 60 * 60 * 1000) });
+  console.log('Token set in cookies:', token);
 };
 
 const fetchTokenFromCookie = (req) => {

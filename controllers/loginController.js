@@ -50,13 +50,7 @@ exports.loginAll =async (req, res, next) => {
     
     const token = await createToken(user);
     console.log("vijay------------>", token)
-    // await setTokenCookie(req, res, token);
-    res.cookie('token', token, { httpOnly: true, secure: true,domain: 'https://tiny-tan-wombat-shoe.cyclic.app' });
-
-
-  console.log("tokenisthe-=========", token);
-  console.log("AJAYVIJAY", req.cookies);
-  console.log("tokenis--------------------", req.cookie.token);
+    await setTokenCookie(res, token);
     
     return res.status(200).json({
         success: true,
