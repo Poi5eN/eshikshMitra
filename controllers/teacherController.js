@@ -1,6 +1,6 @@
 const studyMaterial = require("../models/studyMaterial");
 const cloudinary = require("cloudinary");
-const getDataUri = require("../utils/dataUri");
+const getDataUri = require("../utils/datauri");
 const Attendance = require("../models/attendance");
 const { startOfMonth, endOfMonth } = require("date-fns");
 const teacherPayment = require("../models/teacherPayment");
