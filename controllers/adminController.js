@@ -329,7 +329,6 @@ exports.createFeeStructure = async (req, res) => {
 exports.getAllFeeStructures = async (req, res) => {
   try {
     const { _id, className } = req.query;
-    console.log("chaya", req.query);
 
     const filter = {
       ...(_id ? { _id: _id } : {}),
@@ -337,8 +336,8 @@ exports.getAllFeeStructures = async (req, res) => {
     };
 
     const feeStructures = await FeeStructure.find({
-      ...filter,
       schoolId: req.user.schoolId,
+      ...filter,
       additional: false,
     });
     res.status(200).json(feeStructures);
