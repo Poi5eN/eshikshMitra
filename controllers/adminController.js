@@ -1682,7 +1682,7 @@ exports.getStudentsCreatedAfterAprilOfCurrentYear = async (req, res) => {
     // Use the Mongoose 'find' method to query for students created after the cutoff date
     const allStudent = await NewStudentModel.find({
       schoolId: req.user.schoolId,
-      studentStatus: "active",
+      status: "active",
       createdAt: { $gte: cutoffDate },
     });
 
