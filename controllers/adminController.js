@@ -1878,11 +1878,13 @@ exports.updateEmployee = async (req, res) => {
 
 exports.createClass = async (req, res) => {
   try {
-    const { className, section, subject } = req.body;
+    const { className, section, subject, primary } = req.body;
 
     const existClass = await classModel.findOne({
       schoolId: req.user.schoolId,
       className,
+      section,
+      primary
     });
 
     if (existClass) {
@@ -1897,6 +1899,7 @@ exports.createClass = async (req, res) => {
       className,
       section,
       subject,
+      primary
     });
 
     res.status(200).json({
@@ -1914,9 +1917,10 @@ exports.createClass = async (req, res) => {
 
 exports.getAllClass = async (req, res) => {
   try {
-    const { className } = req.query;
+    const { className, primary } = req.query;
     const filter = {
       ...(className ? { className } : {}),
+      ...(primary ? {primary: true}: {primary: false})
     };
     const classList = await classModel.find({
       ...filter,
