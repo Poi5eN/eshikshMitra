@@ -1920,7 +1920,7 @@ exports.getAllClass = async (req, res) => {
     const { className, primary } = req.query;
     const filter = {
       ...(className ? { className } : {}),
-      ...(primary ? {primary: true}: {primary: false})
+      ...(primary ? {primary}: {})
     };
     const classList = await classModel.find({
       ...filter,
