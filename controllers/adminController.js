@@ -1918,10 +1918,12 @@ exports.createClass = async (req, res) => {
 exports.getAllClass = async (req, res) => {
   try {
     const { className, primary } = req.query;
+    
     const filter = {
       ...(className ? { className } : {}),
-      ...(primary ? {primary}: {})
+      ...(primary ? { primary }: {})
     };
+
     const classList = await classModel.find({
       ...filter,
       schoolId: req.user.schoolId,
