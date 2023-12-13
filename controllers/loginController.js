@@ -29,7 +29,7 @@ exports.loginAll =async (req, res, next) => {
         const Collection = nameOfModel(role);
         console.log("collection",Collection)
         
-        const user = await Collection.findOne({email});
+        const user = await Collection.findOne({email}).select("+password");
         
         if (!user) {
             return res.status(404).json({

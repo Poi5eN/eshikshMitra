@@ -20,6 +20,7 @@ const parentSchema = new mongoose.Schema({
     password: {
         type: String,
         required: [true, "Please Enter Password"],
+        select: false,
         minLength: [8, "Minimum 8 characters Required in Password"]
     },
     status:{

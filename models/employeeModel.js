@@ -20,7 +20,8 @@ const employeeSchema = new mongoose.Schema({
     password: {
         type: String,
         required: [true, "Please Enter Password"],
-        minLength: [8, "Minimum 8 characters Required in Password"]
+        minLength: [8, "Minimum 8 characters Required in Password"],
+        select: false
     },
     dateOfBirth: {
         type: Date,

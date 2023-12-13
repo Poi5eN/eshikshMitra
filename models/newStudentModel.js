@@ -17,6 +17,7 @@ const studentSchema = new mongoose.Schema({
     "password": {
         type: String,
         required: [true, "Please Enter the Password"],
+        select: false
         // minLength: [8, "Minimum 8 character Required in Password"]
     },
     "dateOfBirth": {
