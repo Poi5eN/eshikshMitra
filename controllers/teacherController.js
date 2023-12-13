@@ -229,7 +229,7 @@ exports.createAttendance = async (req, res) => {
     });
 
     console.log("attendanceDateCheck", attendanceDateCheck);
-    if (attendanceDateCheck.length < 0) {
+    if (attendanceDateCheck.length != 0) {
       return res.status(400).send({
         success: true,
         message: "This Date attendance already created",
@@ -254,7 +254,7 @@ exports.createAttendance = async (req, res) => {
 
     const insertedAttendance = await Attendance.insertMany(attendanceData);
 
-    return res.status(201).json(insertedAttendance);
+    return res.status(201).json({success: true, insertedAttendance});
   } catch (error) {
     return res
       .status(500)
