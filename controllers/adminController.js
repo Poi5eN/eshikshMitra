@@ -133,7 +133,7 @@ exports.createTeacher = async (req, res) => {
 
     const mycloud = await cloudinary.v2.uploader.upload(fileUri.content);
 
-    let data = await Teacher.create({
+    const data = await Teacher.create({
       schoolId: req.user.schoolId,
       email: email,
       password: hashedPassword,
