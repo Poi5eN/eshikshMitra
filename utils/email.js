@@ -3,8 +3,7 @@ const nodemailer = require('nodemailer')
 
   
   // Create a function to send an email
-  const sendEmail = (toEmail, subject, htmlContent) => {
-
+  const sendEmail = async (toEmail, subject, htmlContent) => {
 
     const transporter = nodemailer.createTransport({
       service: 'gmail',
@@ -18,14 +17,22 @@ const nodemailer = require('nodemailer')
       },
     });
 
-    const mailOptions = {
-      from: 'parveenpal02001@gmail.com',
-      to: toEmail,
-      subject: subject,
-      html: htmlContent,
-    };
+    try {
+
   
-    return transporter.sendMail(mailOptions);
+      const mailOptions = {
+        from: 'parveenpal02001@gmail.com',
+        to: toEmail,
+        subject: subject,
+        html: htmlContent,
+      };
+    
+      await transporter.sendMail(mailOptions);
+    }
+    catch (error) {
+      console.log(error);
+    }
+
   };
 
 module.exports = sendEmail
