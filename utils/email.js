@@ -12,8 +12,8 @@ const nodemailer = require('nodemailer')
       //   pass: 'wzzthlkezgnfniif'
       // },
       auth: {
-        user: 'parveenpal02001@gmail.com',
-        pass: 'wrvr dukx fmkf gzdp'
+        user: 'corplyxtechnologies000@gmail.com',
+        pass: 'fgrp negr wgew djns'
       },
     });
 
@@ -21,7 +21,7 @@ const nodemailer = require('nodemailer')
 
   
       const mailOptions = {
-        from: 'parveenpal02001@gmail.com',
+        from: 'corplyxtechnologies000@gmail.com',
         to: toEmail,
         subject: subject,
         html: htmlContent,
