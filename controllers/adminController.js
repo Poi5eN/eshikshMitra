@@ -111,73 +111,63 @@ exports.createTeacher = async (req, res) => {
     const { email, password, ...userFields } = req.body;
 
     const file = req.file;
-    console.log("P2req.file", req.file);
 
     if (!email || !password) {
-      res.status(400).json({
+      return res.status(400).json({
         success: false,
         message: "Please fill the required fields",
       });
+    } 
+    const userExist = await Teacher.findOne({ email });
+
+    if (userExist) {
+      return res.status(400).send({
+        success: false,
+        message: "user already exist with this email",
+      });
+    } 
+    const hashedPassword = await hashPassword(password);
+
+    const fileUri = getDataUri(file);
+
+
+    const mycloud = await cloudinary.v2.uploader.upload(fileUri.content);
+
+    let data = await Teacher.create({
+      schoolId: req.user.schoolId,
+      email: email,
+      password: hashedPassword,
+      image: {
+        public_id: mycloud.public_id,
+        url: mycloud.secure_url,
+      },
+      ...userFields,
+    });
+
+    if (data) {
+      const emailContent = `
+       <p>Your EmailID: ${email}</p>
+       <p>Your Password: ${password}</p>
+       `;
+
+
+      sendEmail(email, "Your Login Credentials", emailContent)
+        .then(() => {
+            console.log("Teacher created and also send message to teacher email id")
+        })
+        .catch((error) => {
+          res
+            .status(500)
+            .send({ success: false, message: "Error sending email to teacher email id" });
+        });
     } else {
-      const userExist = await Teacher.findOne({ email });
-
-      if (userExist) {
-        res.status(400).send({
-          success: false,
-          message: "user already exist with this email",
-        });
-      } else {
-        const hashedPassword = await hashPassword(password);
-        const file = req.file;
-
-        const fileUri = getDataUri(file);
-
-        console.log("P2fileUri", fileUri);
-
-        const mycloud = await cloudinary.v2.uploader.upload(fileUri.content);
-
-        let data = await Teacher.create({
-          schoolId: req.user.schoolId,
-          email: email,
-          password: hashedPassword,
-          image: {
-            public_id: mycloud.public_id,
-            url: mycloud.secure_url,
-          },
-          ...userFields,
-        });
-
-        if (data) {
-          console.log("data", data);
-          res.status(201).send({
-            success: true,
-            message: "Teacher created Successfully",
-          });
-          const emailContent = `
-           <p>Your EmailID: ${data.email}</p>
-           <p>Your Password: ${password}</p>
-           `;
-
-           console.log('yup',data.email)
-
-          sendEmail(data.email, "Your Login Credentials", emailContent)
-            .then(() => {
-              res.status(201).send({
-                success: true,
-                message: "Teacher created Successfully",
-              });
-            })
-            .catch((error) => {
-              console.error("Error sending email:", error);
-              res
-                .status(500)
-                .send({ success: false, message: "Error sending email" });
-            });
-        } else {
-          res.send({ success: false, message: "teacher is not created" });
-        }
-      }
+      res.send({ success: false, message: "teacher is not created" });
     }
+
+    res.status(201).send({
+        success: true,
+        message: "Teacher created Successfully",
+      });
   } catch (err) {
     res.status(500).send({ error: err.message });
   }
