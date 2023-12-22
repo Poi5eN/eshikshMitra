@@ -156,19 +156,20 @@ exports.createTeacher = async (req, res) => {
             console.log("Teacher created and also send message to teacher email id")
         })
         .catch((error) => {
-          res
+          return res
             .status(500)
-            .send({ success: false, message: "Error sending email to teacher email id" });
+            .json({ success: false, message: "Error sending email to teacher email id" });
         });
     } else {
-      res.send({ success: false, message: "teacher is not created" });
+      return res.status(500).json({ success: false, message: "teacher is not created" });
     }
 
     res.status(201).send({
         success: true,
         message: "Teacher created Successfully",
       });
-  } catch (err) {
+  } 
+  catch (err) {
     res.status(500).send({ error: err.message });
   }
 };
