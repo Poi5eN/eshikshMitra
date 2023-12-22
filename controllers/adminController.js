@@ -1726,24 +1726,33 @@ exports.createEmployee = async (req, res) => {
       },
       ...employeeFields,
     });
-    const employeeEmailContent = `
-        <p>Your EmailID: ${email}</p>
-        <p>Your Password: ${password}</p>
-    `;
 
-    sendEmail(email, "Employee Login Credentials", employeeEmailContent)
-      .then(() => {
-        console.log(
-          "Employee Created and also send message to employee email Id"
-        );
-      })
-      .catch((error) => {
-        return res.status(500).json({
-          success: false,
-          message: "Mail is not send to Employee Email Address due to error",
-          error: error.message,
-        });
+    if (employeeData) {
+      const employeeEmailContent = `
+      <p>Your EmailID: ${email}</p>
+      <p>Your Password: ${password}</p>
+  `;
+
+  sendEmail(email, "Employee Login Credentials", employeeEmailContent)
+    .then(() => {
+      console.log(
+        "Employee Created and also send message to employee email Id"
+      );
+    })
+    .catch((error) => {
+      return res.status(500).json({
+        success: false,
+        message: "Mail is not send to Employee Email Address due to error",
+        error: error.message,
       });
+    });
+    }
+    else {
+      res.status(201).json({
+        success: true,
+        message: "employee is not created"
+      })
+    }
 
     res.status(201).json({
       success: true,
