@@ -151,7 +151,7 @@ exports.createTeacher = async (req, res) => {
        `;
 
 
-      sendEmail(email, "Your Login Credentials", emailContent)
+      sendEmail(email, "Teacher Login Credentials", emailContent)
         .then(() => {
             console.log("Teacher created and also send message to teacher email id")
         })
@@ -1226,7 +1226,7 @@ exports.createStudentParent = async (req, res) => {
               <p>Your Password: ${studentPassword}</p>
               `;
 
-      sendEmail(studentEmail, "Your Login Credentials", studentEmailContent)
+      sendEmail(studentEmail, "Student Login Credentials", studentEmailContent)
         .then(() => {
           console.log(
             "Student Created and also send message to student email Id"
@@ -1271,7 +1271,7 @@ exports.createStudentParent = async (req, res) => {
               <p>Your Password: ${parentPassword}</p>
               `;
 
-      sendEmail(parentEmail, "Your Login Credentials", parentEmailContent)
+      sendEmail(parentEmail, "Parent Login Credentials", parentEmailContent)
         .then(() => {
           console.log(
             "Parent Created and also send message to Parent email Id"
@@ -1731,7 +1731,7 @@ exports.createEmployee = async (req, res) => {
         <p>Your Password: ${password}</p>
     `;
 
-    sendEmail(email, "Your Login Credentials", employeeEmailContent)
+    sendEmail(email, "Employee Login Credentials", employeeEmailContent)
       .then(() => {
         console.log(
           "Employee Created and also send message to employee email Id"
