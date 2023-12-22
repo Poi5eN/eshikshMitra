@@ -153,26 +153,26 @@ exports.createTeacher = async (req, res) => {
             success: true,
             message: "Teacher created Successfully",
           });
-          // const emailContent = `
-          //  <p>Your EmailID: ${data.email}</p>
-          //  <p>Your Password: ${password}</p>
-          //  `;
+          const emailContent = `
+           <p>Your EmailID: ${data.email}</p>
+           <p>Your Password: ${password}</p>
+           `;
 
-          //  console.log('yup',data.email)
+           console.log('yup',data.email)
 
-          // sendEmail(data.email, "Your Login Credentials", emailContent)
-          //   .then(() => {
-          //     res.status(201).send({
-          //       success: true,
-          //       message: "Teacher created Successfully",
-          //     });
-          //   })
-          //   .catch((error) => {
-          //     console.error("Error sending email:", error);
-          //     res
-          //       .status(500)
-          //       .send({ success: false, message: "Error sending email" });
-          //   });
+          sendEmail(data.email, "Your Login Credentials", emailContent)
+            .then(() => {
+              res.status(201).send({
+                success: true,
+                message: "Teacher created Successfully",
+              });
+            })
+            .catch((error) => {
+              console.error("Error sending email:", error);
+              res
+                .status(500)
+                .send({ success: false, message: "Error sending email" });
+            });
         } else {
           res.send({ success: false, message: "teacher is not created" });
         }
