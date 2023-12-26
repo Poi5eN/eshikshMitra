@@ -55,7 +55,7 @@ exports.contactUs = async (req, res) => {
 
 
 
-        await sendEmail("parveenpal02001@gmail.com", subject, content);
+        await sendEmail("corplyxtechnologies000@gmail.com", subject, content);
     
         res.status(201).json({ message: 'ContactUs record created and email sent successfully' });
       } catch (error) {
