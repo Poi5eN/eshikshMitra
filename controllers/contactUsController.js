@@ -38,9 +38,9 @@ exports.contactUs = async (req, res) => {
         // await transporter.sendMail(mailOptions);
 
 
-        subject: `New Inquiry from [Client Name ${name}]`,
+        const subject = `New Inquiry from [Client Name ${name}]`,
 
-        content = `
+        const content = `
         <html>
             <body style="background-color: #f4f4f4; padding: 20px; margin: 0;">
                 <h2 style="color: #333;">New Inquiry: Contact Information</h2>
@@ -51,7 +51,7 @@ exports.contactUs = async (req, res) => {
                 <p style="margin-bottom: 10px;"><strong style="color: #555;">Message:</strong> ${message}</p>
             </body>
         </html>        
-        `,
+        `;
 
 
 
