@@ -38,7 +38,7 @@ exports.contactUs = async (req, res) => {
         // await transporter.sendMail(mailOptions);
 
 
-        const subject = `New Inquiry from [Client Name ${name}]`,
+        const subject = `New Inquiry from [Client Name ${name}]`;
 
         const content = `
         <html>
