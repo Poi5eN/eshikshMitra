@@ -1748,7 +1748,7 @@ exports.createEmployee = async (req, res) => {
     });
     }
     else {
-      res.status(201).json({
+      return res.status(500).json({
         success: true,
         message: "employee is not created"
       })
