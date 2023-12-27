@@ -2640,8 +2640,10 @@ exports.issueBook = async (req, res) => {
     }
 
     const issuedData = await issueBookModel.findOne({
+      schoolId: req.user.schoolID,
       bookId: issueBookFields.bookId,
       studentId: issueBookFields.studentId,
+      bookName: issueBookFields.bookName,
       status: "issued",
     });
 

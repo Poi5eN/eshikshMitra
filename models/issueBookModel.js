@@ -10,10 +10,10 @@ const issueBookSchema = new mongoose.Schema({
         ref: "NewStudentModel",
         required: true
     },
-    // bookName: {
-    //     type: String,
-    //     required: true
-    // },
+    bookName: {
+        type: String,
+        required: true
+    },
     // subject: {
     //     type: String,
     //     required: true
