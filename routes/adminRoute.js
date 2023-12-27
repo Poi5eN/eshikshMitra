@@ -31,6 +31,7 @@ router.delete('/deleteBook/:bookId', verifyToken, admin.deleteBook);
 router.put('/updateBook/:bookId', verifyToken, admin.updateBook);
 router.post('/issueBook', verifyToken, admin.issueBook);
 router.put('/returnBook', verifyToken, admin.returnBook);
+router.get('/getIssueBookToMe', verifyToken, admin.getAllIssueBookToMe);
 
 router.post('/createItem', verifyToken, admin.createItemDetails);
 router.get('/getAllItems', verifyToken, admin.getAllItems);

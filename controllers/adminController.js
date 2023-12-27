@@ -2722,6 +2722,37 @@ exports.returnBook = async (req, res) => {
   }
 };
 
+
+exports.getAllIssueBookToMe = async (req, res) => {
+  try {
+
+    if (req.user.role !== "student") {
+      return res.status(400).json({
+        success: false,
+        message: "You are not Student",
+      });
+    }
+
+    const listOfBook = await issueBookModel.find({
+      schoolId: req.user.schoolId,
+      studentId: req.user._id
+    })
+
+    res.status(200).json({
+      success: true,
+      message: "List of Books issued is successfully fetched",
+      listOfBook
+    })
+  }
+  catch(error) {
+    res.status(500).json({
+      success: false,
+      message: "Not Fetch of list of issue book",
+      error: error.message,
+    });
+  }
+}
+
 exports.getAllIssuedBookStudent = async (req, res) => {
   try {
     const { bookId } = req.query;
