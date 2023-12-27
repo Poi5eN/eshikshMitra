@@ -2737,7 +2737,8 @@ exports.getAllIssueBookToMe = async (req, res) => {
 
     const listOfBook = await issueBookModel.find({
       schoolId: req.user.schoolId,
-      studentId: req.user._id
+      studentId: req.user._id,
+      status: "issued"
     })
 
     res.status(200).json({
