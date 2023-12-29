@@ -1,3 +1,4 @@
 node_modules/
 package-lock.json/
-/notesApi.txt
+/.env
+./config/config.env

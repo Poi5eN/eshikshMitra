@@ -7,14 +7,14 @@ const nodemailer = require('nodemailer')
     const transporter = nodemailer.createTransport({
       service: 'gmail',
       auth: {
-        user: 'corplyxtechnologies000@gmail.com',
-        pass: 'fgrp negr wgew djns'
+        user: process.env.SMTP_MAIL,
+        pass: process.env.SMTP_PASSWORD
       },
     });
 
     try {
       const mailOptions = {
-        from: 'corplyxtechnologies000@gmail.com',
+        from: process.env.SMTP_MAIL,
         to: toEmail,
         subject: subject,
         html: htmlContent,
