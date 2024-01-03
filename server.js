@@ -6,8 +6,6 @@ const connectToDatabase = require('./config/database')
 
 dotenv.config()
 
-
-
 connectToDatabase();
 //ajay2
 
