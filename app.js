@@ -4,8 +4,7 @@ const routes = require('./routes/route')
 const cors = require("cors");
 const app = express()
 
-// Handle preflight requests
-app.options('*', cors());
+
 
 const corsOptions = {
   origin:['https://eshikshamitra.in', 'http://localhost:3000'],
