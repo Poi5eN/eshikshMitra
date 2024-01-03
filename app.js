@@ -11,7 +11,9 @@ const corsOptions = {
 
   // origin: 'http://localhost:3000',
   credentials: true, // Include cookies and authentication headers
+  allowedHeaders: 'Content-Type,Authorization'
 };
+
 
 app.use(cors(corsOptions));
 
