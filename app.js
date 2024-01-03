@@ -4,18 +4,20 @@ const routes = require('./routes/route')
 const cors = require("cors");
 const app = express()
 
-
-app.use(express.json())
 const corsOptions = {
-    origin:['https://eshikshamitra.in', 'http://localhost:3000'],
+  origin:['https://eshikshamitra.in', 'http://localhost:3000'],
 
-    // methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
 
-    // origin: 'http://localhost:3000',
-    credentials: true, // Include cookies and authentication headers
-  };
+  // origin: 'http://localhost:3000',
+  credentials: true, // Include cookies and authentication headers
+};
 
 app.use(cors(corsOptions));
+
+
+app.use(express.json())
+
 app.use(cookieParser())
 
 app.get("/", (req, res) => {
