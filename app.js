@@ -8,7 +8,7 @@ const app = express()
 
 const corsOptions = {
   // origin:['https://eshikshamitra.in', 'http://localhost:3000'],
-  origin: 'https://eshikshamitra.in',
+  origin: '*',
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
 
   // origin: 'http://localhost:3000',
