@@ -8,11 +8,11 @@ const app = express()
 
 const corsOptions = {
   origin:['https://eshikshamitra.in', 'http://localhost:3000'],
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  // methods: ['GET', 'POST', 'PUT', 'DELETE'],
 
   // origin: 'http://localhost:3000',
   credentials: true, // Include cookies and authentication headers
-  allowedHeaders: 'Content-Type, Authorization'
+  // allowedHeaders: 'Content-Type, Authorization'
 };
 
 
