@@ -252,11 +252,9 @@ exports.updateTeacher = async (req, res) => {
       teacher: updatedTeacher,
     });
   } catch (error) {
-    console.error("P2 Error", error);
     res.status(500).json({
       status: false,
-      message: "teacher is not updated",
-      error: error.message,
+      message: error.message,
     });
   }
 };
@@ -1869,7 +1867,6 @@ exports.updateEmployee = async (req, res) => {
       updatedEmployeeData,
     });
   } catch (error) {
-    console.log("ajay", error)
     res.status(500).json({
       success: false,
       message: "Employee data is not updated due to error",
