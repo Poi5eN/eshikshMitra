@@ -1868,6 +1868,7 @@ exports.updateEmployee = async (req, res) => {
       updatedEmployeeData,
     });
   } catch (error) {
+    console.log("ajay", error)
     res.status(500).json({
       success: false,
       message: "Employee data is not updated due to error",
