@@ -1,20 +1,20 @@
 const express = require('express');
 const router = express.Router();
-const Event = require('../models/event'); 
+const Event = require('../models/event');
 
 
 exports.createEvent = async (req, res) => {
     try {
-        const {Subject,Location,StartTime,EndTime,Description,} = req.body.updatedData
+        const { Subject, Location, StartTime, EndTime, Description, } = req.body.updatedData
 
-    //     const startTime = new Date(StartTime).toLocaleString('en-US', {
-    //         timeZone: 'Asia/Kolkata', // Use the desired time zone
-    //       });
+        //     const startTime = new Date(StartTime).toLocaleString('en-US', {
+        //         timeZone: 'Asia/Kolkata', // Use the desired time zone
+        //       });
 
-    //   const endTime = new Date(EndTime).toLocaleString('en-US', {
-    //     timeZone: 'Asia/Kolkata', // Use the desired time zone
-    //   });
-       
+        //   const endTime = new Date(EndTime).toLocaleString('en-US', {
+        //     timeZone: 'Asia/Kolkata', // Use the desired time zone
+        //   });
+
         const newEvent = await Event.create({
             schoolId: req.user.schoolId,
             Subject: Subject,
@@ -24,19 +24,19 @@ exports.createEvent = async (req, res) => {
             Description: Description
         });
 
-        res.status(201).json({success: true, data:newEvent});
+        res.status(201).json({ success: true, data: newEvent });
     } catch (error) {
-        res.status(500).json({ sucess: false,error: error.message });
+        res.status(500).json({ sucess: false, error: error.message });
     }
 };
 
 exports.getAllEvents = async (req, res) => {
     try {
-        const events = await Event.find({});
-        console.log("events",events)
-        res.status(200).json({success: true, data:events});
+        const events = await Event.find({ schoolId: req.user.schoolId });
+        console.log("events", events)
+        res.status(200).json({ success: true, data: events });
     } catch (error) {
-        res.status(500).json({ success: false,error: error.message });
+        res.status(500).json({ success: false, error: error.message });
     }
 };
 
