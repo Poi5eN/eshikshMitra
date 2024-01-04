@@ -252,7 +252,7 @@ exports.updateTeacher = async (req, res) => {
       teacher: updatedTeacher,
     });
   } catch (error) {
-    console.error(error);
+    console.error("P2 Error", error);
     res.status(500).json({
       status: false,
       message: error.message,
