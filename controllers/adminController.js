@@ -1211,6 +1211,8 @@ exports.createStudentParent = async (req, res) => {
       address: studentAddress,
       contact: studentContact,
       class: studentClass,
+      fatherName: fatherName,
+      motherName:motherName,
       section: studentSection,
       country: studentCountry,
       subject: studentSubject,
