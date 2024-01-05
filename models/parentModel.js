@@ -5,6 +5,10 @@ const parentSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    studentName: {
+        type: String,
+        required: true
+    },
     fullName: {
         type: String,
         required: [true, "Please Enter Father Name"]
@@ -23,8 +27,8 @@ const parentSchema = new mongoose.Schema({
         select: false,
         minLength: [8, "Minimum 8 characters Required in Password"]
     },
-    status:{
-        type:String,
+    status: {
+        type: String,
         required: true,
         default: "active"
     },
@@ -46,7 +50,7 @@ const parentSchema = new mongoose.Schema({
             type: String,
             required: true
         }
-    }, 
+    },
     createdAt: {
         type: Date,
         default: Date.now()

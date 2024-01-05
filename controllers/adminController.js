@@ -1253,6 +1253,7 @@ exports.createStudentParent = async (req, res) => {
 
     const parentData = await ParentModel.create({
       schoolId: req.user.schoolId,
+      studentName: studentFullName,
       fullName: fatherName,
       motherName,
       email: parentEmail,
