@@ -5,6 +5,10 @@ const studyMaterial = new mongoose.Schema({
         type: String,
         required: true
     },
+    className: {
+        type: String,
+        required: true
+    },
     title: {
         type: String,
         required: [true, "Please Enter Title of Notice"]
@@ -13,7 +17,7 @@ const studyMaterial = new mongoose.Schema({
         type: String,
         required: true
     },
-    link : {
+    link: {
         type: String
     },
     file: {
@@ -26,4 +30,4 @@ const studyMaterial = new mongoose.Schema({
     }
 });
 
-module.exports = mongoose.model("studyMaterial",studyMaterial);
+module.exports = mongoose.model("studyMaterial", studyMaterial);

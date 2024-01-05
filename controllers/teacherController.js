@@ -17,6 +17,7 @@ exports.createStudyMaterial = async (req, res) => {
     if (type == "youtube" || type == "Video") {
       study = await studyMaterial.create({
         schoolId: req.user.schoolId,
+        className: req.user.classTeacher,
         title,
         type,
         link,
@@ -26,6 +27,7 @@ exports.createStudyMaterial = async (req, res) => {
       const mycloud = await cloudinary.v2.uploader.upload(fileDataUri.content);
       study = await studyMaterial.create({
         schoolId: req.user.schoolId,
+        className: req.user.classTeacher,
         title,
         type,
         file: {
