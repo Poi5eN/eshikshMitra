@@ -59,7 +59,7 @@ exports.getStudyMaterial = async (req, res) => {
     //     ...(studyId ? {_id: studyId} : {})
     //   }
 
-    const study = await studyMaterial.find({ schoolId: req.user.schoolId });
+    const study = await studyMaterial.find({ schoolId: req.user.schoolId, className: req.user.class });
 
     res.status(200).json({
       success: true,
