@@ -345,8 +345,6 @@ exports.createSalaryPayment = async (req, res) => {
   try {
     const { teacherId, salaryHistory } = req.body;
 
-    console.log("P2", salaryHistory);
-
     year = new Date().getFullYear().toString();
     const existingPayment = await teacherPayment.findOne({
       schoolId: req.user.schoolId,
@@ -354,22 +352,20 @@ exports.createSalaryPayment = async (req, res) => {
       year: year,
     });
 
-    console.log("existingPayment", existingPayment.salaryHistory);
+    if (existingPayment) {
 
-    // const existSameMonthData = existingPayment.salaryHistory.includes(salaryHistory[0]);
-
-    const existSameMonthData = existingPayment.salaryHistory.find((item) => {
-          return item.month === salaryHistory[0].month;
-    });
-
-    if (existSameMonthData) {
-      return res.status(400).json({
-        success: false,
-        message: "Salary of this month is already Paid"
-      })
+      const existSameMonthData = existingPayment.salaryHistory.find((item) => {
+        return item.month === salaryHistory[0].month;
+      });
+  
+      if (existSameMonthData) {
+        return res.status(400).json({
+          success: false,
+          message: "Salary of this month is already Paid"
+        })
+      }
     }
 
-    console.log("existSameMonthData", existSameMonthData);
 
     if (existingPayment) {
       existingPayment.salaryHistory.push(...salaryHistory);
@@ -413,6 +409,8 @@ exports.getPayment = async (req, res) => {
       schoolId: req.user.schoolId,
       ...filter,
     });
+
+    console.log("paymentData", paymentData);
 
     res.status(200).json({
       success: true,

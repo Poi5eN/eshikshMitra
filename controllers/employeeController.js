@@ -10,7 +10,21 @@ exports.createSalaryPayment = async (req, res) => {
             employeeId,
             year: year,
         });
-  
+      
+        if (existingPayment) {
+            const existSameMonthData = existingPayment.salaryHistory.find((item) => {
+                return item.month === salaryHistory[0].month;
+            });
+      
+            if (existSameMonthData) {
+                return res.status(400).json({
+                success: false,
+                message: "Salary of this month is already Paid"
+                })
+            }
+        }
+      
+
         if (existingPayment) {
   
             existingPayment.salaryHistory.push(...salaryHistory);
