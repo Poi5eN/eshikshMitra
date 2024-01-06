@@ -14,8 +14,6 @@ exports.createEvent = async (req, res) => {
         //   const endTime = new Date(EndTime).toLocaleString('en-US', {
         //     timeZone: 'Asia/Kolkata', // Use the desired time zone
         //   });
-
-        console.log("first",req.body.updatedData)
         const newEvent = await Event.create({
             schoolId: req.user.schoolId,
             Subject: Subject,
@@ -27,7 +25,6 @@ exports.createEvent = async (req, res) => {
 
         res.status(201).json({ success: true, data: newEvent });
     } catch (error) {
-        console.log(error)
         res.status(500).json({ sucess: false, error: error.message });
     }
 };
