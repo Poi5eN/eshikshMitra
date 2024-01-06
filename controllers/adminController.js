@@ -1502,7 +1502,7 @@ exports.deactivateStudent = async (req, res) => {
       { schoolId: req.user.schoolId, _id: student.parentId },
       {
         $set: {
-          parentStatus: "deactivated",
+          status: "deactivated",
         },
       },
       { new: true }
