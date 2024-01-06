@@ -22,6 +22,11 @@ const itemSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
+    sellQuantity: {
+        type: Number,
+        required: true,
+        default: 0
+    },
     sellAmount:{
    type: Number,
    required : true,
@@ -32,6 +37,7 @@ const itemSchema = new mongoose.Schema({
         default: Date.now()
     }
 })
+
 
 
 const ItemModel = mongoose.model('ItemModel', itemSchema);

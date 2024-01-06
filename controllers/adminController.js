@@ -662,7 +662,7 @@ exports.createItemDetails = async (req, res) => {
       });
     }
 
-    await ItemModel.create({
+    const data = await ItemModel.create({
       schoolId: req.user.schoolId,
       itemName,
       category,
@@ -673,6 +673,7 @@ exports.createItemDetails = async (req, res) => {
     res.status(201).json({
       success: true,
       message: "Item Details created successfully",
+      data
     });
   } catch (error) {
     res.status(500).json({

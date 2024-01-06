@@ -11,7 +11,10 @@ exports.createsellItem = async (req, res) => {
             schoolId: req.user.schoolId,
             itemId: itemId
         });
-        let data
+
+        let data;
+        
+        console.log("P2 existingSale", existingSale);
        
         if (existingSale) {
             existingSale.sellQuantity += sellQuantity;
@@ -34,7 +37,8 @@ exports.createsellItem = async (req, res) => {
             {
                 $inc: {
                     quantity: -sellQuantity,
-                    sellAmount : totalAmount
+                    sellAmount : totalAmount,
+                    sellQuantity: sellQuantity
                 }
             },
             { new: true } 
@@ -43,13 +47,70 @@ exports.createsellItem = async (req, res) => {
         return res.status(200).json({
             success: true,
             message: "Sale recorded successfully",
-            data: data,
-            updatedData: updatedData
+            sellRecord: data,
+            itemRecord: updatedData
         });
     } catch (error) {
         return res.status(500).json({
             success: false,
             message: "Error recording sale",
+            error: error.message,
+        });
+    }
+};
+
+exports.returnsellItem = async (req, res) => {
+    const { itemId, itemName, category, price, returnQuantity, returnAmount } = req.body;
+
+    try {
+
+        const existingSale = await sellInventory.findOne({
+            schoolId: req.user.schoolId,
+            itemId: itemId
+        });
+
+        
+        
+        console.log("P2 existingSale", existingSale);
+
+        if (!existingSale) {
+            return res.status(400).json({
+                success: false,
+                message: "This item is not sell yet how you return"
+            })
+        }
+       
+        existingSale.sellQuantity -= returnQuantity;
+        existingSale.totalAmount -= returnAmount;
+        let data = await existingSale.save();
+    
+
+
+
+
+       let updatedData = await ItemModel.findOneAndUpdate(
+            { _id: itemId }, 
+            {
+                $inc: {
+                    quantity: returnQuantity,
+                    sellAmount : -returnAmount,
+                    sellQuantity: -returnQuantity
+                }
+
+            },
+            { new: true } 
+        );
+
+        return res.status(200).json({
+            success: true,
+            message: "Return recorded successfully",
+            sellRecord: data,
+            itemRecord: updatedData
+        });
+    } catch (error) {
+        return res.status(500).json({
+            success: false,
+            message: "Error in return sale",
             error: error.message,
         });
     }
