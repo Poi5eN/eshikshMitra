@@ -59,7 +59,16 @@ exports.getStudyMaterial = async (req, res) => {
     //     ...(studyId ? {_id: studyId} : {})
     //   }
 
-    const study = await studyMaterial.find({ schoolId: req.user.schoolId, className: req.user.class });
+
+    let className;
+
+    if (req.user.role === 'teacher') {
+      className = req.user.classTeacher;
+    } else if (req.user.role === 'student') {
+      className = req.user.class;
+    }
+
+    const study = await studyMaterial.find({ schoolId: req.user.schoolId, className: className});
 
     res.status(200).json({
       success: true,
@@ -256,7 +265,7 @@ exports.createAttendance = async (req, res) => {
 
     const insertedAttendance = await Attendance.insertMany(attendanceData);
 
-    return res.status(201).json({success: true, insertedAttendance});
+    return res.status(201).json({ success: true, insertedAttendance });
   } catch (error) {
     return res
       .status(500)
@@ -331,6 +340,14 @@ exports.getAttendanceForStudent = async (req, res) => {
   try {
     const { year, month } = req.query;
     console.log(req.query);
+
+    let studentId;
+
+    if (req.user.role === 'parent') {
+      studentId = req.user.studentId;
+    } else if (req.user.role === 'student') {
+      studentId = req.user._id;
+    }
     // Create a date range for the specified month
     const startDate = startOfMonth(new Date(year, month - 1));
     const endDate = endOfMonth(startDate);
@@ -348,7 +365,7 @@ exports.getAttendanceForStudent = async (req, res) => {
       {
         $match: {
           schoolId: req.user.schoolId,
-          studentId: req.user._id,
+          studentId: studentId,
           className: req.user.class,
           section: req.user.section,
           date: { $gte: startDate, $lte: endDate },
@@ -421,7 +438,7 @@ exports.createSalaryPayment = async (req, res) => {
       const existSameMonthData = existingPayment.salaryHistory.find((item) => {
         return item.month === salaryHistory[0].month;
       });
-  
+
       if (existSameMonthData) {
         return res.status(400).json({
           success: false,
