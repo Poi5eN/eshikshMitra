@@ -373,12 +373,16 @@ exports.getAttendanceForStudent = async (req, res) => {
       {
         $project: {
           _id: 0,
-          studentId: "$_id.studentId",
-          // schoolId: "$_id.schoolId",
-          // studentName: "$_id.fullName",
-          // className: '$_id.className',
-          // section: '$_id.section',
-          attendanceData: 1,
+          data: {
+            studentId: "$_id.studentId",
+            attendanceData: "$attendanceData",
+          },
+          // studentId: "$_id.studentId",
+          // // schoolId: "$_id.schoolId",
+          // // studentName: "$_id.fullName",
+          // // className: '$_id.className',
+          // // section: '$_id.section',
+          // attendanceData: 1,
         },
       },
     ]);
