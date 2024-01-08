@@ -5,6 +5,10 @@ const parentSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    studentId: {
+        type: String,
+        required: true
+    },
     studentName: {
         type: String,
         required: true
