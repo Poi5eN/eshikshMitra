@@ -310,8 +310,72 @@ exports.getAttendanceByMonth = async (req, res) => {
         $project: {
           _id: 0,
           studentId: "$_id.studentId",
-          schoolId: "$_id.schoolId",
-          studentName: "$_id.fullName",
+          // schoolId: "$_id.schoolId",
+          // studentName: "$_id.fullName",
+          // className: '$_id.className',
+          // section: '$_id.section',
+          attendanceData: 1,
+        },
+      },
+    ]);
+
+    res.status(200).json({ message: true, data: attendance });
+  } catch (error) {
+    res
+      .status(500)
+      .json({ error: "Failed to fetch attendance records by month" });
+  }
+};
+
+exports.getAttendanceForStudent = async (req, res) => {
+  try {
+    const { year, month } = req.query;
+    console.log(req.query);
+    // Create a date range for the specified month
+    const startDate = startOfMonth(new Date(year, month - 1));
+    const endDate = endOfMonth(startDate);
+
+    console.log("yo", startDate);
+    console.log("y1", endDate);
+
+    // const attendance = await Attendance.find({
+    //   className: req.user.classTeacher,
+    //   section: req.user.section,
+    //   date: { $gte: startDate, $lte: endDate },
+    // });
+
+    const attendance = await Attendance.aggregate([
+      {
+        $match: {
+          schoolId: req.user.schoolId,
+          studentId: req.user._id,
+          className: req.user.class,
+          section: req.user.section,
+          date: { $gte: startDate, $lte: endDate },
+        },
+      },
+      {
+        $group: {
+          _id: {
+            // schoolId: '$schoolId',
+            studentId: "$studentId",
+            // className: '$className',
+            // section: '$section'
+          },
+          attendanceData: {
+            $push: {
+              date: "$date",
+              present: "$present",
+            },
+          },
+        },
+      },
+      {
+        $project: {
+          _id: 0,
+          studentId: "$_id.studentId",
+          // schoolId: "$_id.schoolId",
+          // studentName: "$_id.fullName",
           // className: '$_id.className',
           // section: '$_id.section',
           attendanceData: 1,
