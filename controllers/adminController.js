@@ -2478,6 +2478,7 @@ exports.createAssignment = async (req, res) => {
       assignment,
     });
   } catch (error) {
+    console.error("Error occurred at--->>>>>>:", error.stack);
     console.log("AJAYARJ---",error)
     res.status(500).json({
       success: false,
