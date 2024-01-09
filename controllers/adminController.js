@@ -2478,6 +2478,7 @@ exports.createAssignment = async (req, res) => {
       assignment,
     });
   } catch (error) {
+    console.log("AJAYARJ---",error)
     res.status(500).json({
       success: false,
       message: "Assignment of that class is not created due to error",
