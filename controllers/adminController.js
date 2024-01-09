@@ -2441,12 +2441,6 @@ exports.createAssignment = async (req, res) => {
     const file = req.file;
     const fileDataUri = getDataUri(file);
 
-
-    console.log("firstreq.file",req.file)
-
-
-    console.log("req.body here-->",req.body)
-
     const existAssignment = await AssignmentModel.findOne({
       className: className,
       section: section,
@@ -2460,13 +2454,10 @@ exports.createAssignment = async (req, res) => {
       });
     }
 
-    
-    console.log("exist-->",existAssignment)
-
-    const assignmentFile = await cloudinary.v2.uploader.upload(
+        const assignmentFile = await cloudinary.v2.uploader.upload(
       fileDataUri.content
     );
-console.log("cloudUploadDone",assignmentFile)
+
     const assignment = await AssignmentModel.create({
       schoolId: req.user.schoolId,
       className,
@@ -2481,7 +2472,6 @@ console.log("cloudUploadDone",assignmentFile)
       },
     });
 
-    console.log("assignment-->",assignment)
     res.status(201).json({
       success: true,
       message: "Assignment of That Class is successfully created",
@@ -2545,7 +2535,7 @@ exports.updateAssignment = async (req, res) => {
     if (file) {
       const fileDataUri = getDataUri(file);
 
-      const assignmentFile = await cloudinary.uploader.upload(
+      const assignmentFile = await cloudinary.v2.uploader.upload(
         fileDataUri.content
       );
 
