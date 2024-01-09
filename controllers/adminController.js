@@ -2441,6 +2441,9 @@ exports.createAssignment = async (req, res) => {
     const file = req.file;
     const fileDataUri = getDataUri(file);
 
+
+    console.log("req.body here-->",req.body)
+
     const existAssignment = await AssignmentModel.findOne({
       className: className,
       section: section,
@@ -2453,6 +2456,9 @@ exports.createAssignment = async (req, res) => {
         message: "Assignment of that Class is already exist",
       });
     }
+
+    
+    console.log("exist-->",existAssignment)
 
     const assignmentFile = await cloudinary.v2.uploader.upload(
       fileDataUri.content
@@ -2472,6 +2478,7 @@ exports.createAssignment = async (req, res) => {
       },
     });
 
+    console.log("assignment-->",assignment)
     res.status(201).json({
       success: true,
       message: "Assignment of That Class is successfully created",
