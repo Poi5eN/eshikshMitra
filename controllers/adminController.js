@@ -2542,9 +2542,11 @@ exports.updateAssignment = async (req, res) => {
     if (file) {
       const fileDataUri = getDataUri(file);
 
-      const assignmentFile = await cloudinary.v2.uploader.upload(
+      const assignmentFile = await cloudinary.uploader.upload(
         fileDataUri.content
       );
+
+      // const mycloud = await cloudinary.uploader.upload(fileUri.content);
 
       existAssignment.file = {
         public_id: assignmentFile.public_id,
