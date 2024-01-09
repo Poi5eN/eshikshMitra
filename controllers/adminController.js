@@ -2442,7 +2442,7 @@ exports.createAssignment = async (req, res) => {
     const fileDataUri = getDataUri(file);
 
 
-    console.log("firstreq.file"),req.file
+    console.log("firstreq.file",req.file)
 
 
     console.log("req.body here-->",req.body)
