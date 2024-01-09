@@ -2442,6 +2442,9 @@ exports.createAssignment = async (req, res) => {
     const fileDataUri = getDataUri(file);
 
 
+    console.log("firstreq.file"),req.file
+
+
     console.log("req.body here-->",req.body)
 
     const existAssignment = await AssignmentModel.findOne({
@@ -2463,7 +2466,7 @@ exports.createAssignment = async (req, res) => {
     const assignmentFile = await cloudinary.v2.uploader.upload(
       fileDataUri.content
     );
-
+console.log("cloudUploadDone",assignmentFile)
     const assignment = await AssignmentModel.create({
       schoolId: req.user.schoolId,
       className,
